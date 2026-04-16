@@ -1,9 +1,0 @@
-uiTests/ConstructorTest.class
-driver/DriverFactory.class
-uiTests/RegisterTest.class
-pages/ForgotPasswordPage.class
-uiTests/BaseUiTest.class
-uiTests/LoginTest.class
-pages/RegisterPage.class
-pages/LoginPage.class
-pages/MainPage.class
