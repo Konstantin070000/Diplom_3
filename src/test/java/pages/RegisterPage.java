@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,6 +19,7 @@ public class RegisterPage {
         this.driver = driver;
     }
 
+    @Step("Регистрация пользователя: {name}, {email}")
     public void register(String name, String email, String password) {
         driver.findElement(nameField).sendKeys(name);
         driver.findElement(emailField).sendKeys(email);
@@ -25,10 +27,12 @@ public class RegisterPage {
         driver.findElement(registerButton).click();
     }
 
+    @Step("Клик по ссылке входа")
     public void clickLoginLink() {
         driver.findElement(loginLink).click();
     }
 
+    @Step("Проверка отображения ошибки пароля")
     public boolean isPasswordErrorDisplayed() {
         return driver.findElement(passwordErrorText).isDisplayed();
     }

@@ -1,5 +1,7 @@
 package uiTests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import pages.ForgotPasswordPage;
 import pages.LoginPage;
@@ -14,6 +16,8 @@ public class LoginTest extends BaseUiTest {
     private final String password = "password123";
 
     @Test
+    @DisplayName("Авторизация с главной страницы")
+    @Description("Проверяем успешную авторизацию пользователя через кнопку входа на главной странице")
     public void loginFromMainPageButtonShouldBeSuccessful() {
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -25,6 +29,8 @@ public class LoginTest extends BaseUiTest {
     }
 
     @Test
+    @DisplayName("Авторизация через Личный кабинет")
+    @Description("Проверяем успешную авторизацию пользователя через кнопку Личный кабинет")
     public void loginFromPersonalAccountShouldBeSuccessful() {
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -36,6 +42,8 @@ public class LoginTest extends BaseUiTest {
     }
 
     @Test
+    @DisplayName("Авторизация через страницу регистрации")
+    @Description("Проверяем успешную авторизацию пользователя через переход со страницы регистрации")
     public void loginFromRegisterPageShouldBeSuccessful() {
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -50,6 +58,8 @@ public class LoginTest extends BaseUiTest {
     }
 
     @Test
+    @DisplayName("Авторизация через страницу восстановления пароля")
+    @Description("Проверяем успешную авторизацию пользователя через переход со страницы восстановления пароля")
     public void loginFromForgotPasswordPageShouldBeSuccessful() {
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
