@@ -1,10 +1,9 @@
 package uiTests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import driver.DriverFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BaseUiTest {
 
@@ -12,10 +11,9 @@ public class BaseUiTest {
 
     @Before
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver();
         driver.manage().window().maximize();
-        driver.get("https://stellarburgers.nomoreparties.site/");
+        driver.get("https://stellarburgers.education-services.ru/");
     }
 
     @After
