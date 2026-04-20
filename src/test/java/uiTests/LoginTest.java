@@ -1,17 +1,31 @@
 package uiTests;
 
+import client.UserClient;
+import io.restassured.response.Response;
+import model.User;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import pages.ForgotPasswordPage;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.RegisterPage;
+import utils.UserGenerator;
 
 import static org.junit.Assert.assertTrue;
 
 public class LoginTest extends BaseUiTest {
 
-    private final String email = "testlogin@example.com";
-    private final String password = "password123";
+    private final UserClient userClient = new UserClient();
+    private User user;
+    private String accessToken;
+
+    @Before
+    public void setUpUser() {
+        user = UserGenerator.getRandomUser();
+        Response response = userClient.createUser(user);
+        accessToken = response.jsonPath().getString("accessToken");
+    }
 
     @Test
     public void loginFromMainPageButtonShouldBeSuccessful() {
@@ -19,7 +33,7 @@ public class LoginTest extends BaseUiTest {
         LoginPage loginPage = new LoginPage(driver);
 
         mainPage.clickLoginButton();
-        loginPage.login(email, password);
+        loginPage.login(user.getEmail(), user.getPassword());
 
         assertTrue(driver.getPageSource().contains("Конструктор"));
     }
@@ -30,7 +44,7 @@ public class LoginTest extends BaseUiTest {
         LoginPage loginPage = new LoginPage(driver);
 
         mainPage.clickPersonalAccountButton();
-        loginPage.login(email, password);
+        loginPage.login(user.getEmail(), user.getPassword());
 
         assertTrue(driver.getPageSource().contains("Конструктор"));
     }
@@ -44,7 +58,7 @@ public class LoginTest extends BaseUiTest {
         mainPage.clickLoginButton();
         loginPage.clickRegisterLink();
         registerPage.clickLoginLink();
-        loginPage.login(email, password);
+        loginPage.login(user.getEmail(), user.getPassword());
 
         assertTrue(driver.getPageSource().contains("Конструктор"));
     }
@@ -58,8 +72,15 @@ public class LoginTest extends BaseUiTest {
         mainPage.clickLoginButton();
         loginPage.clickForgotPasswordLink();
         forgotPasswordPage.clickLoginLink();
-        loginPage.login(email, password);
+        loginPage.login(user.getEmail(), user.getPassword());
 
         assertTrue(driver.getPageSource().contains("Конструктор"));
+    }
+
+    @After
+    public void tearDownUser() {
+        if (accessToken != null) {
+            userClient.deleteUser(accessToken);
+        }
     }
 }

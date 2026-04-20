@@ -12,11 +12,14 @@ public class BaseUiTest {
     @Before
     public void setUp() {
         driver = DriverFactory.getDriver();
+        driver.manage().window().maximize();
         driver.get("https://stellarburgers.education-services.ru/");
     }
 
     @After
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
